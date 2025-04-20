@@ -23,7 +23,7 @@ const RoomFinder = () => {
       setError(null);
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8080/api/rooms", {
+        const response = await fetch("https://gatornest-backend.onrender.com/api/rooms", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -74,7 +74,7 @@ const RoomFinder = () => {
       const token = localStorage.getItem("token");
       
       // First, get the room ID using the room number
-      const roomResponse = await fetch(`http://localhost:8080/api/rooms/number/${room.room_number}`, {
+      const roomResponse = await fetch(`https://gatornest-backend.onrender.com/api/rooms/number/${room.room_number}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -97,7 +97,7 @@ const RoomFinder = () => {
       }
       
       // Then, join the room using the room ID
-      const joinResponse = await fetch(`http://localhost:8080/api/rooms/${roomId}/join`, {
+      const joinResponse = await fetch(`https://gatornest-backend.onrender.com/api/rooms/${roomId}/join`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -114,7 +114,7 @@ const RoomFinder = () => {
       alert("Successfully joined the room! The room price has been added to your pending dues.");
       
       // Refresh the room data to update the UI
-      const roomsResponse = await fetch("http://localhost:8080/api/rooms", {
+      const roomsResponse = await fetch("https://gatornest-backend.onrender.com/api/rooms", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,

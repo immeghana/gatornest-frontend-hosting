@@ -14,7 +14,7 @@ const AdminMaintenancePanel = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/maintenance-requests");
+        const response = await fetch("https://gatornest-backend.onrender.com/api/maintenance-requests");
         if (!response.ok) throw new Error("Failed to fetch requests");
         const data = await response.json();
         setRequests(data);
@@ -47,7 +47,7 @@ const AdminMaintenancePanel = () => {
     setPageMessage("Saving...");
 
     try {
-      const response = await fetch(`http://localhost:8080/api/maintenance-requests/${id}`, {
+      const response = await fetch(`https://gatornest-backend.onrender.com/api/maintenance-requests/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

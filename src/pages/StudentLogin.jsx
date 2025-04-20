@@ -17,7 +17,7 @@ function StudentLogin() {
     e.preventDefault();
 
     // Send login request to backend
-    fetch("http://localhost:8080/api/student/login", {
+    fetch("https://gatornest-backend.onrender.com/api/student/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

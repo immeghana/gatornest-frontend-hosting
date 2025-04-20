@@ -30,7 +30,7 @@ const StudentPayment = () => {
 
     const fetchPendingDues = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/student/pending-dues", {
+        const response = await fetch("https://gatornest-backend.onrender.com/api/student/pending-dues", {
           headers: {
             "Authorization": `Bearer ${token}`
           }
@@ -50,7 +50,7 @@ const StudentPayment = () => {
 
     const fetchPaymentHistory = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/payments/student/1", {
+        const response = await fetch("https://gatornest-backend.onrender.com/api/payments/student/1", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -158,7 +158,7 @@ const StudentPayment = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/payments", {
+      const response = await fetch("https://gatornest-backend.onrender.com/api/payments", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -194,7 +194,7 @@ const StudentPayment = () => {
       setIsPaying(false);
 
       // Re-fetch updated balance
-      const res = await fetch("http://localhost:8080/api/student/pending-dues", {
+      const res = await fetch("https://gatornest-backend.onrender.com/api/student/pending-dues", {
         headers: {
           "Authorization": `Bearer ${token}`
         }

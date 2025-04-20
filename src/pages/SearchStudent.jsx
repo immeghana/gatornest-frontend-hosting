@@ -14,7 +14,7 @@ function StudentSearch() {
     setLoading(true);
   
     try {
-      const response = await axios.get('http://localhost:8080/api/students/search', {
+      const response = await axios.get('https://gatornest-backend.onrender.com/api/students/search', {
         params: { type: searchType, term: searchTerm }
       });
   
