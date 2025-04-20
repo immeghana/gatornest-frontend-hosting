@@ -18,7 +18,7 @@ describe('Student Registration Page', () => {
   });
 
   it('should submit the form and show success alert', () => {
-    cy.intercept('POST', 'http://localhost:8080/api/student/register', {
+    cy.intercept('POST', 'https://gatornest-backend.onrender.com/api/student/register', {
       statusCode: 200,
       body: { message: 'Registration successful' },
     }).as('registerStudent');

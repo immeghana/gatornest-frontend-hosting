@@ -6,7 +6,7 @@ describe('Find Roommate Tests', () => {
       win.localStorage.setItem('token', 'fake-jwt-token');
     });
 
-    cy.intercept('GET', 'http://localhost:8080/api/student/get-all', {
+    cy.intercept('GET', 'https://gatornest-backend.onrender.com/api/student/get-all', {
       statusCode: 200,
       body: [
         {

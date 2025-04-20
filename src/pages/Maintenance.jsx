@@ -33,7 +33,7 @@ const Maintenance = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/maintenance-requests") 
+    fetch("https://gatornest-backend.onrender.com/api/maintenance-requests") 
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch requests");
         return res.json();
@@ -65,7 +65,7 @@ const Maintenance = () => {
       permission_to_enter: form.permissionToEnter,
     };
   
-    fetch("http://localhost:8080/api/maintenance-requests", {
+    fetch("https://gatornest-backend.onrender.com/api/maintenance-requests", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newRequest),

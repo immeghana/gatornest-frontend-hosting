@@ -33,7 +33,7 @@ const ProfilePage = () => {
       return;
     }
 
-    fetch("http://localhost:8080/api/student/profile", {
+    fetch("https://gatornest-backend.onrender.com/api/student/profile", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

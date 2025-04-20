@@ -69,7 +69,7 @@ function FindRoommate() {
       const token = localStorage.getItem("token"); // Retrieve JWT token
   
       try {
-        const response = await fetch("http://localhost:8080/api/student/get-all", {
+        const response = await fetch("https://gatornest-backend.onrender.com/api/student/get-all", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,

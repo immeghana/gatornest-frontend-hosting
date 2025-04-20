@@ -57,7 +57,7 @@ function ManageRooms() {
   const [deleteRoomNumber, setDeleteRoomNumber] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_BASE_URL = "http://localhost:8080/api/rooms"; // Adjust this based on your backend URL
+  const API_BASE_URL = "https://gatornest-backend.onrender.com/api/rooms"; // Adjust this based on your backend URL
 
   const handleAddInputChange = (e) => {
     const { name, value } = e.target;

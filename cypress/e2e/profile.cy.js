@@ -31,7 +31,7 @@ describe('Student Profile Page Tests', () => {
 
   it('should submit profile form successfully', () => {
     // Intercept the PUT request made on form submission
-    cy.intercept('PUT', 'http://localhost:8080/api/student/profile', {
+    cy.intercept('PUT', 'https://gatornest-backend.onrender.com/api/student/profile', {
       statusCode: 200,
       body: { message: 'Profile updated successfully' },
     }).as('updateProfile');

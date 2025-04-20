@@ -12,7 +12,7 @@ describe('Admin Maintenance Request Flow', () => {
     cy.contains('Staff Login').click();
 
     // Step 2: Intercept login and fill form
-    cy.intercept('POST', 'http://localhost:8080/api/admin/login', {
+    cy.intercept('POST', 'https://gatornest-backend.onrender.com/api/admin/login', {
       statusCode: 200,
       body: { token: 'staff-mock-token' },
     }).as('staffLogin');
@@ -31,7 +31,7 @@ describe('Admin Maintenance Request Flow', () => {
     cy.url().should('include', '/maintenanceinbox');
 
     // Step 4: Intercept maintenance request list
-    cy.intercept('GET', 'http://localhost:8080/api/maintenance-requests', {
+    cy.intercept('GET', 'https://gatornest-backend.onrender.com/api/maintenance-requests', {
       statusCode: 200,
       body: [
         {
