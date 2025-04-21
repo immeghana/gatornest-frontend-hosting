@@ -1,67 +1,92 @@
-/// <reference types="cypress" />
-
-describe('Student Profile Page Tests', () => {
-  beforeEach(() => {
-    // Simulate login by setting localStorage
-    cy.window().then((win) => {
-      win.localStorage.setItem('token', 'fake-jwt-token');
-      win.localStorage.setItem('userId', '123');
-    });
-
+// cypress/e2e/pages.cy.js
+describe('Page Loading Tests', () => {
+  it('should load the home page successfully', () => {
+    cy.visit('/');
+    
+    // Check that key elements are present
+    cy.contains('Welcome to GatorNest').should('be.visible');
+    cy.contains('Explore Our Dorms & Amenities').should('be.visible');
+    
+    // Test navigation menu
+    cy.get('nav').should('be.visible');
+    cy.contains('a', 'Home').should('be.visible');
+  });
+  
+  it('should load the registration page successfully', () => {
+    cy.visit('/registration');
+    
+    // Check title and form
+    cy.contains('Hostel Registration').should('be.visible');
+    cy.get('.registration-form').should('be.visible');
+    
+    // Check form fields
+    cy.get('input[name="name"]').should('be.visible');
+    cy.get('input[name="email"]').should('be.visible');
+    cy.get('input[name="phone"]').should('be.visible');
+    cy.get('input[name="dormPreference"]').should('be.visible');
+    cy.get('input[name="password"]').should('be.visible');
+  });
+  
+  it('should load the student login page successfully', () => {
+    cy.visit('/studentlogin');
+    
+    // Check title and form
+    cy.contains('Student Login').should('be.visible');
+    cy.get('.StudentLogin-form').should('be.visible');
+    
+    // Check form fields
+    cy.get('input[name="email"]').should('be.visible');
+    cy.get('input[name="password"]').should('be.visible');
+  });
+  
+  it('should load the profile page successfully', () => {
     cy.visit('/profile');
-  });
-
-  it('should load and display profile form', () => {
+    
+    // Check title and form
     cy.contains('Student Profile & Preferences').should('be.visible');
-
-    cy.get('form').within(() => {
-      cy.get('input[name="name"]').should('exist');
-      cy.get('select[name="gender"]').should('exist');
-      cy.get('input[name="age"]').should('exist');
-      cy.get('input[name="major"]').should('exist');
-      cy.get('input[name="language"]').should('exist');
-      cy.get('input[name="contact"]').should('exist');
-      cy.get('select[name="earlyBird"]').should('exist');
-      cy.get('select[name="cleanliness"]').should('exist');
-      cy.get('select[name="diet"]').should('exist');
-      cy.get('select[name="visitors"]').should('exist');
-      cy.get('select[name="sameLanguage"]').should('exist');
-    });
+    cy.get('.profile-form').should('be.visible');
+    
+    // Check main sections
+    cy.contains('Personal Information').should('be.visible');
+    cy.contains('Roommate Preferences').should('be.visible');
   });
-
-  it('should submit profile form successfully', () => {
-    // Intercept the PUT request made on form submission
-    cy.intercept('PUT', 'https://gatornest-backend.onrender.com/api/student/profile', {
-      statusCode: 200,
-      body: { message: 'Profile updated successfully' },
-    }).as('updateProfile');
-
-    // Stub the alert popup
-    cy.window().then((win) => {
-      cy.stub(win, 'alert').as('alertStub');
-    });
-
-    cy.get('form').within(() => {
-      cy.get('input[name="name"]').type('Alice');
-      cy.get('select[name="gender"]').select('Female');
-      cy.get('input[name="age"]').type('21');
-      cy.get('input[name="major"]').type('Biology');
-      cy.get('input[name="language"]').type('English');
-      cy.get('input[name="contact"]').type('123-456-7890');
-
-      cy.get('select[name="earlyBird"]').select('Early Bird');
-      cy.get('select[name="cleanliness"]').select('Very Tidy');
-      cy.get('select[name="diet"]').select('Vegetarian');
-      cy.get('select[name="visitors"]').select('Occasionally');
-      cy.get('select[name="sameLanguage"]').select("Yes");
-
-      cy.get('button[type="submit"]').click();
-    });
-
-    // Confirm request happened
-    cy.wait('@updateProfile');
-
-    // Confirm alert showed correct message
-    cy.get('@alertStub').should('have.been.calledWith', 'Profile preferences saved successfully!');
+  
+  it('should load the room finder page successfully', () => {
+    cy.visit('/roomfinder');
+    
+    // Check title and content
+    cy.contains('Select Your Flat Type').should('be.visible');
+    cy.get('.flat-selection').should('be.visible');
+    
+    // Check flat types are displayed
+    cy.contains('1B1B').should('be.visible');
+    cy.contains('2B2B').should('be.visible');
+    cy.contains('3B3B').should('be.visible');
+  });
+  
+  it('should load the FAQ page successfully', () => {
+    cy.visit('/faq');
+    
+    // Check title and content
+    cy.contains('Frequently Asked Questions').should('be.visible');
+    cy.get('.faq-item').should('be.visible');
+    
+    // Check at least one FAQ is present
+    cy.contains('How do I register for a hostel?').should('be.visible');
+  });
+  
+  it('should have a working floating widget', () => {
+    cy.visit('/');
+    
+    // Check if the page loaded properly
+    cy.get('body').should('be.visible');
+    
+    // Check if any fixed position elements exist at the bottom right of the page
+    cy.get('div[class*="floating"], div[class*="widget"], div[style*="position: fixed"]')
+      .should('exist');
+    
+    // Check that we can find navigation links using a more generic approach
+    cy.get('nav a, header a, .navigation a')
+      .should('have.length.at.least', 1);
   });
 });

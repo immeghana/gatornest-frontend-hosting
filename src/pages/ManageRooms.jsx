@@ -71,7 +71,7 @@ function ManageRooms() {
   const handleAddRoom = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/`, {
+      const response = await fetch(`${API_BASE_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,9 +80,9 @@ function ManageRooms() {
         body: JSON.stringify({
           name: roomDetails.name,
           type: roomDetails.roomType,
-          room_number: parseInt(roomDetails.roomNumber, 10), // Convert to int
-          price: parseInt(roomDetails.price, 10), // Convert to int
-          vacancy: parseInt(roomDetails.vacancies), 
+          room_number: roomDetails.roomNumber, // Remove parseInt
+          price: parseFloat(roomDetails.price),
+          vacancy: parseInt(roomDetails.vacancies, 10),
         }),
       });
 
